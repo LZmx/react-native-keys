@@ -1,5 +1,5 @@
 {
-  "name": "react-native-keys",
+  "name": "@codeduku/react-native-keys",
   "version": "0.7.14",
   "description": "🔐 Make protected .ENVs variables",
   "main": "./src/index.ts",

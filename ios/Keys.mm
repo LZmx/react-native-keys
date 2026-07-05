@@ -27,7 +27,10 @@ RCT_EXPORT_MODULE()
 // Installing JSI Bindings
 RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(install)
 {
-    RCTBridge* bridge = [RCTBridge currentBridge];
+    RCTBridge* bridge = self.bridge ?: [RCTBridge currentBridge];
+    if (bridge == nil) {
+        return @false;
+    }
     RCTCxxBridge* cxxBridge = (RCTCxxBridge*)bridge;
     if (cxxBridge == nil) {
         return @false;

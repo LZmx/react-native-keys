@@ -59,13 +59,13 @@
     "undecryptable",
     "envs"
   ],
-  "repository": "https://github.com/numandev1/react-native-keys",
-  "author": "numandev1 <muhammadnuman70@gmail.com> (https://github.com/numandev1)",
+  "repository": "https://github.com/LZmx/react-native-keys",
+  "author": "Codeduku (https://github.com/LZmx)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/numandev1/react-native-keys/issues"
+    "url": "https://github.com/LZmx/react-native-keys/issues"
   },
-  "homepage": "https://github.com/numandev1/react-native-keys#readme",
+  "homepage": "https://github.com/LZmx/react-native-keys#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },

@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.authors      = package["author"]
 
   s.platforms    = { :ios => "12.4" }
-  s.source       = { :git => "https://github.com/numandev1/react-native-keys.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/LZmx/react-native-keys.git", :tag => "#{s.version}" }
 
   s.source_files = "ios/**/*.{h,m,mm}", "cpp/**/*.{h,c,cpp}"
   # Use install_modules_dependencies helper to install the dependencies if React Native version >=0.71.0.

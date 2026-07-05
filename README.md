@@ -6,11 +6,31 @@
 
 [![GitHub Repo stars](https://img.shields.io/badge/React_Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](#installation)
 [![GitHub Repo stars](https://img.shields.io/badge/Expo-1B1F23?style=for-the-badge&logo=expo&logoColor=white)](#managed-expo)
-[![GitHub Repo stars](https://img.shields.io/static/v1?style=for-the-badge&message=Discord&color=5865F2&logo=Discord&logoColor=FFFFFF&label=)](https://discord.gg/fgPHnZpH9d)
-[![GitHub Repo stars](https://img.shields.io/github/stars/numandev1/react-native-keys?style=for-the-badge&logo=github)](https://github.com/numandev1/react-native-keys/stargazers)
-![npm](https://img.shields.io/npm/dt/react-native-keys?style=for-the-badge)
+[![GitHub Repo stars](https://img.shields.io/github/stars/LZmx/react-native-keys?style=for-the-badge&logo=github)](https://github.com/LZmx/react-native-keys/stargazers)
+![npm](https://img.shields.io/npm/dt/@codeduku/react-native-keys?style=for-the-badge)
 
 </div>
+
+<p align="center"><b>@Codeduku/react-native-keys</b> — A fork of <a href="https://github.com/numandev1/react-native-keys">react-native-keys</a> maintained by Codeduku.</p>
+
+### Fork Changes (v0.7.14)
+
+- **iOS**: Fixed runtime crash on RN 0.85+ (new architecture). Replaced `[RCTBridge currentBridge]` with `self.bridge ?: [RCTBridge currentBridge]` — the former returns `nil` under the new architecture, causing the JSI runtime to fail to load.
+- **Android**: Updated `compileSdk` version for compatibility with newer React Native versions.
+
+Install via npm:
+
+```sh
+yarn add @codeduku/react-native-keys
+```
+
+Or as an alias to use the original `react-native-keys` import path:
+
+```sh
+yarn add react-native-keys@npm:@codeduku/react-native-keys@0.7.14
+```
+
+---
 
 <p align="center"><b>REACT-NATIVE-KEYS</b> is a react-native package, which helps us to protect our <code>ENVs</code> and manage different environments like <code>dev</code>, <code>staging</code>, <code>production</code></p>
 
@@ -37,19 +57,9 @@ We can Manage **secure**(protected) and **public** enviroment through **react-na
 **public:** Public environment variables are stored on the native side like Java and Objective-C which can decompile or hack.
 **Note**: in public, we mostly store `Bundle Id`, `Package Id`, `App Name` or any other **AndroidManifest.xml** env
 
-### Would you like to support me?
+### Original Author
 
-<div align="center">
-<a href="https://github.com/numandev1?tab=followers">
-    <img src="https://img.shields.io/github/followers/numandev1?label=Follow%20%40numandev1&style=social" height="36" />
-</a>
-<a href="https://twitter.com/numandev1/">
-    <img src="https://img.shields.io/twitter/follow/numandev1?label=Follow%20%40numandev1&style=social" height="36" />
-</a>
-<a href="https://www.youtube.com/@numandev?sub_confirmation=1"><img src="https://img.shields.io/youtube/channel/subscribers/UCYCUspfN7ZevgCj3W5GlFAw?style=social" height="36" /><a/>
-</br>
-<a href="https://www.buymeacoffee.com/numan.dev" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
-</div>
+This is a fork of [react-native-keys](https://github.com/numandev1/react-native-keys) by [numandev1](https://github.com/numandev1). All credit for the original library goes to them.
 
 #### See the [How we are protecting ENVs on the app side?](docs/workflow.md)
 
@@ -617,6 +627,4 @@ This package full alternative of [react-native-config](https://github.com/luggit
 
 The above-mentioned packages do not provide any **security** for **environment variables** as well as these packages are not as fast as the **react-native-keys** package because it does not use JSI (JavaScript Interface).
 
-## Consider supporting with a ⭐️ [star on GitHub](https://github.com/numandev1/react-native-keys/stargazers)
-
-If you are using the library in one of your projects, consider supporting it with a star. It takes a lot of time and effort to keep this maintained and address issues and bugs. Thank you.
+## Consider supporting with a ⭐️ [star on GitHub](https://github.com/LZmx/react-native-keys)

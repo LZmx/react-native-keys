@@ -103,9 +103,19 @@ if(!found){
 }
 
 if(!found) {
-  throw new GradleException(
-    "${project.name}: unable to locate React Native android sources. " +
-      "Ensure you have you installed React Native as a dependency in your project and try again.")
+  // Some RN versions (0.81+) don't ship android sources locally.
+  // Fall back to the resolved react-native npm directory — CMake uses
+  // find_package(ReactAndroid REQUIRED CONFIG) via the gradle plugin,
+  // so the local android directory is not strictly required.
+  def reactNativePkg = file("${resolveReactNativeDirectory()}/package.json")
+  if (reactNativePkg.exists()) {
+    nodeModulesDir = resolveReactNativeDirectory().parentFile
+    found = true
+  } else {
+    throw new GradleException(
+      "${project.name}: unable to locate React Native android sources. " +
+        "Ensure you have you installed React Native as a dependency in your project and try again.")
+  }
 }
 
 def nodeModulesPath = nodeModulesDir.toString().replace("\\", "/")

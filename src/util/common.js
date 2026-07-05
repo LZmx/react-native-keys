@@ -6,9 +6,10 @@ const isExample = process.env.IS_EXAMPLE === 'TRUE';
 const DEFAULT_FILE_NAME = 'keys.development.json';
 
 const expoExampleDirName = 'exampleExpo';
-const exampleDirName =
+var _env = process.env;
+var exampleDirName =
   process.cwd().includes(expoExampleDirName) ||
-  process.env?.SRCROOT?.includes(expoExampleDirName)
+  (_env.SRCROOT && _env.SRCROOT.includes(expoExampleDirName))
     ? expoExampleDirName
     : 'example';
 
@@ -66,21 +67,23 @@ module.exports.getKeys = (KEYS_FILE_NAME) => {
 };
 
 module.exports.genTSType = (allKeys) => {
-  let result =
+  var publicKeys = allKeys && allKeys.public;
+  var secureKeys = allKeys && allKeys.secure;
+  var result =
     '// this file is auto generate, please do not modify\nexport type KeyTurboType = {';
-  Object.keys(allKeys?.public ?? {}).forEach((key) => {
+  Object.keys(publicKeys || {}).forEach((key) => {
     result += `\n  ${key}: string;`;
   });
-  if (!allKeys?.public) {
+  if (!publicKeys) {
     result += '\n [key: string]: string;\n};\n\n';
   } else {
     result += '\n};\n\n';
   }
   result += 'export type KeyTurboSecuredType = {';
-  Object.keys(allKeys?.secure ?? {}).forEach((key) => {
+  Object.keys(secureKeys || {}).forEach((key) => {
     result += `\n  ${key}: string;`;
   });
-  if (!allKeys?.secure) {
+  if (!secureKeys) {
     result += '\n [key: string]: string;\n};\n\n';
   } else {
     result += '\n};\n\n';

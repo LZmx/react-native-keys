@@ -13,10 +13,13 @@
 
 <p align="center"><b>@Codeduku/react-native-keys</b> — A fork of <a href="https://github.com/numandev1/react-native-keys">react-native-keys</a> maintained by Codeduku.</p>
 
-### Fork Changes (v0.7.14)
+### Fork Changes (v0.7.15)
 
 - **iOS**: Fixed runtime crash on RN 0.85+ (new architecture). Replaced `[RCTBridge currentBridge]` with `self.bridge ?: [RCTBridge currentBridge]` — the former returns `nil` under the new architecture, causing the JSI runtime to fail to load.
-- **Android**: Updated `compileSdk` version for compatibility with newer React Native versions.
+- **Android**: Updated `compileSdk` for newer React Native versions.
+- **Android**: Improved React Native source resolution for RN 0.81+ where the `react-native/android` directory may not exist locally ([#118](https://github.com/numandev1/react-native-keys/issues/118)). Falls back to the npm package directory so CMake can resolve via the gradle plugin.
+- **iOS/Xcode**: Removed optional chaining (`?.`) and nullish coalescing (`??`) from `src/util/common.js` for compatibility with older Node.js versions in Xcode build phase scripts ([#96](https://github.com/numandev1/react-native-keys/issues/96)).
+- **Security model caveat**: See [Security Notice](#security-notice) below. The client-side AES encryption in this library is **obfuscation, not true encryption** — the cipher and key material are stored together in the binary.
 
 Install via npm:
 
@@ -27,7 +30,7 @@ yarn add @codeduku/react-native-keys
 Or as an alias to use the original `react-native-keys` import path:
 
 ```sh
-yarn add react-native-keys@npm:@codeduku/react-native-keys@0.7.14
+yarn add react-native-keys@npm:@codeduku/react-native-keys@0.7.15
 ```
 
 ---
@@ -241,6 +244,12 @@ Keys.secureFor('SECRET_KEY'); // 'ABCSE#$DDSD
 ```
 
 Keep in mind It's [basically impossible to prevent users from reverse engineering mobile app secrets](https://rammic.github.io/2015/07/28/hiding-secrets-in-android-apps/) but this library is more secure.
+
+> **Security Notice**: This library uses client-side AES encryption where the ciphertext, encryption key, and IV are all stored within the app binary. This makes it **obfuscation, not true encryption** — a determined attacker with access to the binary can recover the secrets. Known advisories:
+> - [GHSA-fj44-h6xw-896g](https://github.com/advisories/GHSA-fj44-h6xw-896g)
+> - [SNYK-JS-REACTNATIVEKEYS-10674028](https://security.snyk.io/vuln/SNYK-JS-REACTNATIVEKEYS-10674028)
+>
+> This is a fundamental limitation of client-side secret storage on mobile devices, not a bug unique to this library. For truly sensitive credentials, use a backend proxy or runtime key service instead.
 
 ## Setup
 
